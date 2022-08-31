@@ -79,7 +79,8 @@ jobs:
 
     - name: Check for data races
       if: always()
-      run: grep -A50 'DATA RACE' output.log # && exit 1 || test 1 TODO: remove this comment to enable build failure on data races (after all are fixed)
+      continue-on-error: true # TODO: remove this comment to enable build failure on data races (after all are fixed)
+      run: grep -A50 'DATA RACE' output.log && exit 1 || test 1
 
     - name: Archive logs
       if: always()
